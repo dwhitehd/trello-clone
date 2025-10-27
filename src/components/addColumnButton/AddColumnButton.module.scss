@@ -1,0 +1,52 @@
+@use '../../styles/styles.scss' as *;
+
+.container {
+  min-width: 272px;
+
+  @include tablet {
+    min-width: calc(50% - 6px);
+  }
+}
+
+.addButton {
+  width: 100%;
+  padding: 16px;
+  min-height: 56px;
+  background: $hover-medium;
+  border: none;
+  border-radius: $radius-md;
+  font-size: $font-md;
+  font-weight: 500;
+  color: $text;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.12);
+  }
+
+  &:active {
+    background: rgba(0, 0, 0, 0.16);
+  }
+
+  @include tablet {
+    padding: 18px;
+    min-height: 60px;
+  }
+
+  @include mobile {
+    padding: 20px;
+    min-height: 64px;
+    font-size: 16px;
+  }
+}
+
+// Responsive design for mobile
+@include mobile {
+  .container {
+    min-width: 100%;
+  }
+}
