@@ -1,0 +1,128 @@
+@use './../styles/styles.scss' as *;
+
+.container {
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #0079bf;
+}
+
+.board {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+
+  // Allow touch panning on the board itself but cards will override with touch-action: none
+  // This provides better UX - you can scroll the board but drag individual cards
+  touch-action: pan-x pan-y;
+
+  // Custom scrollbar styling
+  &::-webkit-scrollbar {
+    height: 12px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+// Drag overlay styles with enhanced visual feedback
+:global(.dnd-drag-overlay) {
+  :global(.card) {
+    transform: rotate(3deg) scale(1.05);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25),
+                0 0 0 2px rgba(0, 0, 0, 0.25);
+    cursor: grabbing;
+    animation: dragFloat 2s ease-in-out infinite;
+  }
+}
+
+// Floating animation for dragged cards
+@keyframes dragFloat {
+  0%, 100% {
+    transform: rotate(3deg) scale(1.05) translateY(0);
+  }
+  50% {
+    transform: rotate(3deg) scale(1.05) translateY(-4px);
+  }
+}
+
+// Column drop indicator for horizontal dragging
+:global(.column-drop-indicator) {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -12px;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(
+      180deg,
+      transparent,
+      #666 10%,
+      #666 90%,
+      transparent
+    );
+    border-radius: 2px;
+    animation: slideInLeft 0.2s ease-out;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.35);
+  }
+}
+
+// Slide in animation for column drop indicator
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.loading {
+  padding: 20px;
+  text-align: center;
+  color: #5e6c84;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+// Responsive design for tablet
+@include tablet {
+  .container {
+    padding: 16px;
+  }
+
+  .board {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+}
+
+// Responsive design for mobile
+@include mobile {
+  .container {
+    padding: 12px;
+  }
+
+  .board {
+    flex-direction: column;
+    gap: 12px;
+    overflow-x: visible;
+  }
+}
