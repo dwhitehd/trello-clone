@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic';
 import Modal from '@/components/modals/modal/Modal';
-import EditableTitle from '@/components/editableTitle/EditableTitle';
+import EditableTitle from '@/components/EditableTitle/EditableTitle';
 import { useBoardStore } from '@/store/useBoardStore';
 import { useModalState } from '@/hooks/useModalState';
 import { ModalType, getModalTitle, getModalPlaceholder } from '@/types/modal';
