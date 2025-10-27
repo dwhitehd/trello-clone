@@ -1,0 +1,107 @@
+@use '../../styles/styles.scss' as *;
+
+.card {
+  background: white;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 8px;
+  @include card-elevation;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s, opacity 0.2s, border 0.2s;
+  animation: slideIn 0.3s ease-out;
+  min-height: 60px;
+
+  // Critical for mobile touch drag-and-drop
+  // Prevents browser from handling touch events (scrolling, zooming)
+  // allowing dnd-kit to handle the drag operation
+  touch-action: none;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  // When card is being dragged (placeholder)
+  &[data-dragging="true"] {
+    opacity: 0.3;
+    border: 2px dashed rgba(0, 0, 0, 0.25);
+    background: rgba(0, 0, 0, 0.03);
+    animation: placeholderPulse 1.5s ease-in-out infinite;
+  }
+
+  // Tablet - intermediate padding and spacing
+  @include tablet {
+    padding: 14px;
+    margin-bottom: 10px;
+    min-height: 64px;
+  }
+
+  // Mobile - larger padding and spacing
+  @include mobile {
+    padding: 16px;
+    margin-bottom: 12px;
+    min-height: 72px;
+
+    // Disable hover effect on mobile
+    &:hover {
+      transform: none;
+    }
+  }
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #172b4d;
+  margin: 0 0 8px 0;
+  @include text-truncate;
+  max-width: 100%;
+}
+
+.footer {
+  @include flex-center;
+  margin-top: 8px;
+
+  @include tablet {
+    margin-top: 10px;
+  }
+
+  @include mobile {
+    margin-top: 12px;
+  }
+}
+
+.commentCount {
+  color: #5e6c84;
+  font-size: 12px;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+// Animation for card entrance
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Pulsing animation for placeholder when card is being dragged
+@keyframes placeholderPulse {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
