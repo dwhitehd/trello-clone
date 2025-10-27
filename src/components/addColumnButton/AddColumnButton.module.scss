@@ -2,10 +2,6 @@
 
 .container {
   min-width: 272px;
-
-  @include tablet {
-    min-width: calc(50% - 6px);
-  }
 }
 
 .addButton {
