@@ -1,0 +1,83 @@
+@use '../../styles/styles' as *;
+
+.titleWrapper {
+  margin-bottom: 20px;
+  padding-left: 8px;
+}
+
+.title {
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 4px;
+  display: inline-block;
+  transition: background 0.2s;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  &::after {
+    content: ' ✏️';
+    opacity: 0;
+    transition: opacity 0.2s;
+    font-size: 16px;
+    margin-left: 8px;
+  }
+
+  &:hover::after {
+    opacity: 0.7;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+  }
+}
+
+.titleInput {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 4px;
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  padding: 8px 12px;
+  outline: none;
+  min-width: 300px;
+
+  &:focus {
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+  }
+}
+
+// Responsive design for mobile
+@include mobile {
+  .titleWrapper {
+    margin-bottom: 16px;
+    padding-left: 4px;
+  }
+
+  .title {
+    font-size: 20px;
+    padding: 6px 10px;
+
+    &::after {
+      font-size: 14px;
+    }
+  }
+
+  .titleInput {
+    font-size: 20px;
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
